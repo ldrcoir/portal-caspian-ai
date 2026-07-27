@@ -10,10 +10,11 @@ interface GlowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
-  ({ className, variant = "primary", size = "md", glow = false, children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", glow = false, type = "button", children, ...props }, ref) => {
     return (
       <button
         ref={ref}
+        type={type}
         className={cn(
           "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap",
           size === "sm" && "h-9 px-3.5 text-sm",
