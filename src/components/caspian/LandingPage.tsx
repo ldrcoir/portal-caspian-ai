@@ -19,12 +19,15 @@ import {
   Mail,
 } from "lucide-react";
 import { useAppStore } from "@/store/app-store";
+import { useT } from "@/i18n";
 import { Logo } from "@/components/caspian/Logo";
 import { GlassCard } from "@/components/caspian/GlassCard";
 import { GlowButton } from "@/components/caspian/GlowButton";
+import { LanguageSwitcher } from "@/components/caspian/LanguageSwitcher";
 
 export function LandingPage() {
   const { setView, pricingTiers, models, agents } = useAppStore();
+  const t = useT();
   const [email, setEmail] = useState("");
 
   return (
@@ -40,12 +43,13 @@ export function LandingPage() {
             <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">قیمت‌گذاری</a>
           </nav>
           <div className="flex items-center gap-2">
+            <LanguageSwitcher compact />
             <GlowButton
               variant="ghost"
               size="sm"
               onClick={() => setView("auth")}
             >
-              ورود
+              {t("auth.login")}
             </GlowButton>
             <GlowButton
               variant="primary"
@@ -53,7 +57,7 @@ export function LandingPage() {
               glow
               onClick={() => setView("auth")}
             >
-              ثبت‌نام
+              {t("auth.register")}
             </GlowButton>
           </div>
         </div>
