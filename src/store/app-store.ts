@@ -31,7 +31,7 @@ export interface ApiKey {
   monthlyCapToman?: number;
 }
 
-export type ProviderType = "openrouter" | "openai" | "anthropic" | "google" | "azure" | "custom";
+export type ProviderType = "openrouter" | "openai" | "anthropic" | "google" | "azure" | "custom" | "caspian";
 
 export interface ProviderKey {
   id: string;
@@ -51,6 +51,7 @@ export const PROVIDERS = [
   { type: "google" as const, label: "Google AI", defaultBaseUrl: "https://generativelanguage.googleapis.com/v1", docsUrl: "https://aistudio.google.com/apikey", description: "اتصال مستقیم به Gemini", color: "#4285F4" },
   { type: "azure" as const, label: "Azure OpenAI", defaultBaseUrl: "", docsUrl: "https://portal.azure.com", description: "Azure OpenAI Service", color: "#0078D4" },
   { type: "custom" as const, label: "سفارشی", defaultBaseUrl: "", docsUrl: "#", description: "هر endpoint سازگار با OpenAI", color: "#94A3B8" },
+  { type: "caspian" as const, label: "کاسپین (مغز خودمان)", defaultBaseUrl: "http://127.0.0.1:8585/v1", docsUrl: "#", description: "مغز محلی کاسپین — بدون سرویس بیرونی، بدون کلیدِ خارجی", color: "#F4A300" },
 ];
 
 export interface Transaction {
@@ -246,6 +247,8 @@ const DEFAULT_SITE_CONTENT: SiteContent = {
 };
 
 const DEFAULT_MODELS: AIModel[] = [
+  { id: "caspian-fanus", name: "فانوس (کاسپین)", provider: "caspian", upstreamModelId: "caspian-fanus-sparse", inputTokenPriceToman: 0, outputTokenPriceToman: 0, isActive: true, description: "مغز خودمان — اسپارس، روی پردازنده معمولی", badge: "کاسپین", contextWindow: 4096, capabilities: ["chat"] },
+  { id: "caspian-chat", name: "کاسپین گفت‌وگو", provider: "caspian", upstreamModelId: "caspian-chat-v0.4.1", inputTokenPriceToman: 0, outputTokenPriceToman: 0, isActive: true, description: "مدل گفت‌وگوی فارسی خودمان — دانش در وزن‌ها", badge: "محلی", contextWindow: 4096, capabilities: ["chat"] },
   { id: "gpt-5.6", name: "GPT-5.6", provider: "openrouter", upstreamModelId: "openai/gpt-5.6", inputTokenPriceToman: 18, outputTokenPriceToman: 72, isActive: true, description: "قدرتمندترین مدل OpenAI", badge: "محبوب", contextWindow: 256000, capabilities: ["chat", "vision", "tools"] },
   { id: "claude-sonnet-5", name: "Claude Sonnet 5", provider: "openrouter", upstreamModelId: "anthropic/claude-sonnet-5", inputTokenPriceToman: 22, outputTokenPriceToman: 110, isActive: true, description: "بهترین تعادل کیفیت و سرعت", badge: "پیشنهادی", contextWindow: 200000, capabilities: ["chat", "vision", "tools"] },
   { id: "gemini-2.5-pro", name: "Gemini 2.5 Pro", provider: "openrouter", upstreamModelId: "google/gemini-2.5-pro", inputTokenPriceToman: 16, outputTokenPriceToman: 64, isActive: true, description: "مدل چندوجهی گوگل", contextWindow: 2000000, capabilities: ["chat", "vision", "tools"] },
